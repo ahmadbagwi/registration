@@ -4,8 +4,10 @@
   <div class = "container">
     <div class = "row">
         <div class = "col-lg-6 col-sm-12">
-            <h2><?= esc($title); ?></h2>
-            <div class="form-group">
+        <div class="panel panel-success">
+                <div class="panel-heading"><h2><?= esc($title); ?></h2></div>
+                <div class="panel-body">
+                <div class="form-group">
                 <form action="/Registration/create" id="registration" method="POST" >
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" name="firstName" /><br/>
@@ -36,6 +38,8 @@
                     <input type="text" class="form-control" name="ccDate" placeholder="12/21"/><br />
                     <input type="submit" class = "btn btn-danger" name="submit" value="Submit" />
                 </form>
+            </div>
+                </div>
             </div>
         </div>
     </div>

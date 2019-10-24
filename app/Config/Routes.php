@@ -93,3 +93,4 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 }
 
 $routes->match(['get', 'post'], 'Registration/create', 'Registration::create');
+$routes->match(['get', 'post'], 'Registration/dologin', 'Registration::dologin');

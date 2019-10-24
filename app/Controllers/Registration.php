@@ -34,9 +34,8 @@ class Registration extends BaseController
         $data = array (
             'title' => "Registration Form",
         );
-        //echo view('templates/header', ['title' => 'Create a news item']);
-        echo view('page/registration', $data);
-        //echo view('templates/footer');
+        echo view('template/header', $data);
+		echo view('page/registration', $data);
 
     }
     else
@@ -55,24 +54,80 @@ class Registration extends BaseController
             'ccDate'        => $this->request->getVar('ccDate'),
             
         ]);
+        $data = array (
+            'title' => "Registration Success",
+        );
+        echo view('template/header', $data);
         echo view('page/success');
     }
 
     
     }
-    public function testhash()
+
+    public function login()
     {
-        $text = "ahmadbagwirifai";
-        $password = password_hash($text, PASSWORD_DEFAULT);
-        //echo $password;
-        $input = "ahmadbagwirifai";
-        $inputhash = password_hash($input, PASSWORD_DEFAULT);
-        
-        if (password_verify($input, $password)) {
-            echo 'Password is valid!';
-        } else {
-            echo 'Invalid password.';
+        $data = array(
+            'title' => "Login page",
+        );
+        echo view('template/header', $data);
+        echo view('page/login');
+    }
+
+    public function dologin()
+    {
+        if (! $this->validate([
+            'email'     =>  'required',
+            'password'  =>  'required',
+        ]))
+        {
+            $data = array (
+                'title' => "Login Form",
+            );
+            echo view('template/header', $data);
+            echo view('page/login', $data);
+    
         }
+        else
+        {
+            $email = $this->request->getVar('email');
+            $password = $this->request->getVar('password');
+            $findpassword = new RegistrationModel();
+            $resultpassword = $findpassword->where('email', $email)->findColumn('password');
+            $mypassword = $resultpassword[0];
+            
+            if (password_verify($password, $mypassword)) {
+                $data = array (
+                    'title' => "Dashboard",
+                    'email'     => $email,
+                    'logged_in' => TRUE
+                );
+                $session = \Config\Services::session();
+                $sessionData = [
+                    
+                ];
+            
+                $session->set($data);
+                echo view('template/header', $data);
+                echo view('page/dashboard');
+            } else {
+                $data = array (
+                    'title' => "Login Form",
+                );
+                echo view('template/header', $data);
+                echo view('page/login');
+            }
+
+                
+        }
+    }
+
+    public function testpass()
+    {
+        $email = "ahmad.bagwi@sangkuriang";
+        $findpassword = new RegistrationModel();
+        $mypassword = $findpassword->where('email', $email)->findColumn('password');
+        $satu = $mypassword[0];
+        print_r($satu);
     }
 
 }
