@@ -18,9 +18,9 @@
                     <label for="toc">Term and Condition</label><br/>
                     <input type="checkbox" name="toc" value="accept" required> I accept Term and Condition<br>
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required /><br />
+                    <input type="password" class="form-control" id="password" name="password"/><br />
                     <label for="repeat_password">Repeat Password</label>
-                    <input type="password" class="form-control" id="repeat_password" name="repeat_password" required /><br />
+                    <input type="password" class="form-control" id="repeat_password" name="repeat_password"/><br />
                     <label for="address">Address</label>
                     <div class = "wrapper_address">
                       <textarea name="address" class="form-control"></textarea><br />
@@ -29,11 +29,11 @@
                     <label for="dob">Date of birth</label>
                     <input type="date" class="form-control" name="dob" /><br />
                     <label for="type">Membership Type</label>
-                    <input type="text" class="form-control" id="type" name="type" /><br />
+                    <input type="text" class="form-control" id="type" name="type" placeholder="autocomplete"/><br />
                     <label for="ccNumber">Credit Card Number</label>
                     <input type="text" class="form-control" name="ccNumber" placeholder="5361-8428-6553-4298" /><br />
                     <label for="ccType">Credit Card Type</label>
-                    <input type="text" class="form-control" id="ccType" name="ccType"/><br />
+                    <input type="text" class="form-control" id="ccType" name="ccType" placeholder="autocomplete"/><br />
                     <label for="ccDate">Credit Card Date</label>
                     <input type="text" class="form-control" name="ccDate" placeholder="12/21"/><br />
                     <input type="submit" class = "btn btn-danger" name="submit" value="Submit" />

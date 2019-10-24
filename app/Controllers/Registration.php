@@ -102,10 +102,6 @@ class Registration extends BaseController
                     'logged_in' => TRUE
                 );
                 $session = \Config\Services::session();
-                $sessionData = [
-                    
-                ];
-            
                 $session->set($data);
                 echo view('template/header', $data);
                 echo view('page/dashboard');
@@ -118,6 +114,20 @@ class Registration extends BaseController
             }
 
                 
+        }
+    }
+
+    public function logout() 
+    {
+        $session = \Config\Services::session();
+        $session->remove('title');
+        if ($session->has('email')) {
+            $session->remove('title');
+            $session->remove('email');
+            $session->remove('logged_in');
+            return redirect()->to('/');;
+        } else {
+            redirect()->route('/');
         }
     }
 
