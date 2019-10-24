@@ -8,6 +8,7 @@ class Registration extends BaseController
         $data = array (
                         'title' => "Registration Form",
         );
+        echo view('template/header', $data);
 		echo view('page/registration', $data);
 	}
 
@@ -45,7 +46,7 @@ class Registration extends BaseController
             'lastName'      => $this->request->getVar('lastName'),
             'email'         => $this->request->getVar('email'),
             'toc'           => $this->request->getVar('toc'),
-            'password'      => $this->request->getVar('password'),
+            'password'      => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
             'address'       => $this->request->getVar('address'),
             'dob'           => $this->request->getVar('dob'),
             'type'          => $this->request->getVar('type'),
@@ -56,7 +57,23 @@ class Registration extends BaseController
         ]);
         echo view('page/success');
     }
-}
+
+    
+    }
+    public function testhash()
+    {
+        $text = "ahmadbagwirifai";
+        $password = password_hash($text, PASSWORD_DEFAULT);
+        //echo $password;
+        $input = "ahmadbagwirifai";
+        $inputhash = password_hash($input, PASSWORD_DEFAULT);
+        
+        if (password_verify($input, $password)) {
+            echo 'Password is valid!';
+        } else {
+            echo 'Invalid password.';
+        }
+    }
 
 }
 
