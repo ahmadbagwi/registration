@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-
+use App\Models\RegistrationModel;
 class Registration extends BaseController
 {
 	public function index()
@@ -14,26 +14,47 @@ class Registration extends BaseController
 	public function create()
     {
     helper('form');
-    $model = new NewsModel();
+    $model = new RegistrationModel();
 
     if (! $this->validate([
-        'title' => 'required|min_length[3]|max_length[255]',
-        'body'  => 'required'
+        'lastName'  =>  'required|min_length[3]|max_length[100]',
+        'email'     =>  'required',
+        'toc'       =>  'required',
+        'password'  =>  'required',
+        'repeat_password'   =>  'required',
+        'address'   =>  'required',
+        'dob'       =>  'required',
+        'type'      =>  'required',
+        'ccNumber'  =>  'required',
+        'ccType'    =>  'required',
+        'ccDate'    =>  'required',
     ]))
     {
-        echo view('templates/header', ['title' => 'Create a news item']);
-        echo view('news/create');
-        echo view('templates/footer');
+        $data = array (
+            'title' => "Registration Form",
+        );
+        //echo view('templates/header', ['title' => 'Create a news item']);
+        echo view('page/registration', $data);
+        //echo view('templates/footer');
 
     }
     else
     {
         $model->save([
-            'title' => $this->request->getVar('title'),
-            'slug'  => url_title($this->request->getVar('title')),
-            'body'  => $this->request->getVar('body'),
+            'firstName'     => $this->request->getVar('firstName'),
+            'lastName'      => $this->request->getVar('lastName'),
+            'email'         => $this->request->getVar('email'),
+            'toc'           => $this->request->getVar('toc'),
+            'password'      => $this->request->getVar('password'),
+            'address'       => $this->request->getVar('address'),
+            'dob'           => $this->request->getVar('dob'),
+            'type'          => $this->request->getVar('type'),
+            'ccNumber'      => $this->request->getVar('ccNumber'),
+            'ccType'        => $this->request->getVar('ccType'),
+            'ccDate'        => $this->request->getVar('ccDate'),
+            
         ]);
-        echo view('news/success');
+        echo view('page/success');
     }
 }
 

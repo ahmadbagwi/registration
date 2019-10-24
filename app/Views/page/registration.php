@@ -4,6 +4,7 @@
     <title><?= esc($title); ?></title>
     <meta name="viewport" content="initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
   </head>
   <body>
   <?= \Config\Services::validation()->listErrors(); ?>
@@ -18,9 +19,9 @@
                     <label for="lastName">Last Name</label>
                     <input type="text" class="form-control" name="lastName" required /><br />
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="firstName" required /><br />
+                    <input type="email" class="form-control" name="email" required /><br />
                     <label for="toc">Term and Condition</label><br/>
-                    <input type="checkbox" name="toc" value="accept"> I accept Term and Condition<br>
+                    <input type="checkbox" name="toc" value="accept" required> I accept Term and Condition<br>
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" required /><br />
                     <label for="repeat_password">Repeat Password</label>
