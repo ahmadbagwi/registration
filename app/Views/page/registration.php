@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
   </head>
   <body>
   <?= \Config\Services::validation()->listErrors(); ?>
@@ -35,15 +36,15 @@
                       <button class="add_address">+</button>
                     </div>
                     <label for="dob">Date of birth</label>
-                    <input type="date" class="form-control" name="dob" required /><br />
+                    <input type="date" class="form-control" name="dob" /><br />
                     <label for="type">Membership Type</label>
-                    <input type="text" class="form-control" id="type" name="type" required /><br />
+                    <input type="text" class="form-control" id="type" name="type" /><br />
                     <label for="ccNumber">Credit Card Number</label>
-                    <input type="text" class="form-control" name="ccNumber" required /><br />
+                    <input type="text" class="form-control" name="ccNumber" placeholder="5361-8428-6553-4298" /><br />
                     <label for="ccType">Credit Card Type</label>
-                    <input type="text" class="form-control" name="ccType" required /><br />
+                    <input type="text" class="form-control" id="ccType" name="ccType"/><br />
                     <label for="ccDate">Credit Card Date</label>
-                    <input type="text" class="form-control" name="ccDate" required /><br />
+                    <input type="text" class="form-control" name="ccDate" placeholder="12/21"/><br />
                     <input type="submit" class = "btn btn-danger" name="submit" value="Submit" />
                 </form>
             </div>
@@ -75,7 +76,10 @@
       toc: "required",
       dob: "required",
       type: "required",
-      ccNumber: "required",
+      ccNumber: {
+        required: true,
+        creditcard: true
+      },
       ccType: "required",
       ccDate: "required",
     },
@@ -88,7 +92,10 @@
       toc: "Please accept the Term and Condition",
       dob: "Please fill valid date of birth",
       type: "Select your membership type",
-      ccNumber: "Input valid credit card number",
+      ccNumber: {
+        required:  "Input credit card number spart by -",
+        creditcard: "Please input valid credit card number",
+      },
       ccType: "Input valid credit card type",
       ccDate: "Input valid credit card date",
     }
@@ -126,6 +133,14 @@
     ];
     $( "#type" ).autocomplete({
       source: membershipType
+    });
+
+    var ccType = [
+      "Visa",
+      "Master Card"
+    ];
+    $( "#ccType" ).autocomplete({
+      source: ccType
     });
   } );
   </script>
