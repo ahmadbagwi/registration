@@ -4,8 +4,10 @@
     <title><?= esc($title); ?></title>
     <meta name="viewport" content="initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
   <?= \Config\Services::validation()->listErrors(); ?>
@@ -28,11 +30,14 @@
                     <label for="repeat_password">Repeat Password</label>
                     <input type="password" class="form-control" id="repeat_password" name="repeat_password" required /><br />
                     <label for="addess">Address</label>
-                    <textarea name="address" class="form-control" required></textarea><br />
+                    <div class = "wrapper_address">
+                      <textarea name="address[]" class="form-control"></textarea><br />
+                      <button class="add_address">+</button>
+                    </div>
                     <label for="dob">Date of birth</label>
                     <input type="date" class="form-control" name="dob" required /><br />
                     <label for="type">Membership Type</label>
-                    <input type="text" class="form-control" name="type" required /><br />
+                    <input type="text" class="form-control" id="type" name="type" required /><br />
                     <label for="ccNumber">Credit Card Number</label>
                     <input type="text" class="form-control" name="ccNumber" required /><br />
                     <label for="ccType">Credit Card Type</label>
@@ -88,5 +93,40 @@
       ccDate: "Input valid credit card date",
     }
   });
+  </script>
+  <script>
+    $(document).ready(function() {
+      var max_fields      = 4; //maximum input boxes allowed
+      var wrapper   		= $(".wrapper_address"); //Fields wrapper
+      var add_button      = $(".add_address"); //Add button ID
+      
+      var x = 1; //initlal text box count
+      $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+          x++; //text box increment
+          $(wrapper).append('<div><textarea name="address[]" class="form-control"></textarea><a href="#" class="remove_address"><button class="add_address">-</button></a></div><br />'); //add input box
+        }
+      });
+      
+      $(wrapper).on("click",".remove_address", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+      })
+    });
+  </script>
+  <script>
+  $( function() {
+    var membershipType = [
+      "Silver",
+      "Gold",
+      "Platinum",
+      "Black",
+      "VIP",
+      "VVIP"
+    ];
+    $( "#type" ).autocomplete({
+      source: membershipType
+    });
+  } );
   </script>
 </html>
