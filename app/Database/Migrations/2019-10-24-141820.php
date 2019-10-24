@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php 
+namespace Registration;
+use App\Database\Migrations;
 
 class Registration extends \CodeIgniter\Database\Migration {
 
